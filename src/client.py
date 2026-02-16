@@ -1,4 +1,5 @@
 import requests
+import json
 from typing import Dict
 
 
@@ -7,6 +8,10 @@ class RequestClient:
     def __init__(self):
         self._base_url = "https://api.restful-api.dev"
         self.session = requests.Session()
+        self.session.headers.update({
+            "Content-Type":"application/json",
+            "x-api-key":""
+        })
 
     @property
     def baseurl(self):
@@ -22,7 +27,7 @@ class RequestClient:
         return response
     
     def post(self, endpoint:str, payload:dict):
-        response = self.session.post(self.baseurl + endpoint, json=payload)
+        response = self.session.post(self.baseurl + endpoint, data=json.dumps(payload))
         return response
     
     def put(self):
