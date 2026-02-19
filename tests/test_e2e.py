@@ -36,3 +36,5 @@ class TestUserSuccessStory:
         assert self.product.data["color"] == response_body["data"]["color"]
         assert self.product.data["ram"] == response_body["data"]["ram"]
         assert self.product.data["chip"] == response_body["data"]["chip"]
+    
+    

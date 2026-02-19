@@ -10,7 +10,7 @@ class RequestClient:
         self.session = requests.Session()
         self.session.headers.update({
             "Content-Type":"application/json",
-            "x-api-key":""
+            "x-api-key":"
         })
 
     @property

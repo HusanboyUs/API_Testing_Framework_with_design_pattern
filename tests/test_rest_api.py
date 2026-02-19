@@ -127,7 +127,7 @@ class TestRestApi:
         response_body = response.json()
         # assert
         assert 200 == response.status_code
-        assert "null" == response_body["name"]
+        assert response_body["name"] == None
         assert iphone.data.get("color") == response_body["data"]["color"]
         assert iphone.data.get("model") == response_body["data"]["model"]
         assert iphone.data.get("used") == response_body["data"]["cousedlor"]
@@ -145,7 +145,7 @@ class TestRestApi:
         # assert
         assert 200 == response.status_code
         assert music.name == response_body["name"]
-        assert "null" == response_body["data"]
+        assert {} == response_body["data"]
 
 
 
