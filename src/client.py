@@ -30,12 +30,15 @@ class RequestClient:
         response = self.session.post(self.baseurl + endpoint, data=json.dumps(payload))
         return response
     
-    def put(self):
-        pass
+    def put(self,endpoint:str ,**kwargs):
+        response = self.session.put(self.baseurl + endpoint, **kwargs)
+        return response
 
-    def patch(self):
-        pass
+    def patch(self, endpoint:str ,**kwargs):
+        response = self.session.patch(self.baseurl + endpoint, **kwargs)
+        return response
 
-    def delete(self):
-        pass
+    def delete(self,endpoint:str ,**kwargs):
+        response = self.session.delete(self.baseurl + endpoint, **kwargs)
+        return response
     
