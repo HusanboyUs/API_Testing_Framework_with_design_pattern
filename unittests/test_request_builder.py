@@ -89,13 +89,12 @@ class TestRequestBuilder(unittest.TestCase):
             "region":"uk",
             "color":"white"
         }}
-        print(result)
         # assert
         self.assertDictEqual(
             result.serialize(),
             expected
         ), "RequestBody builder did not built expected data"
-        self.assertTrue(isinstance(RequestBody,result)), "Result is not instance of RequestBody"
+        self.assertTrue(isinstance(result, RequestBody)), "Result is not instance of RequestBody"
 
     def test_request_builder_with_wrong_name_instance(self):
         # assert
@@ -130,7 +129,7 @@ class TestRequestBuilder(unittest.TestCase):
             .name("Macbook Pro")
             .build()
         )
-        expected = {"name":"Macbook Pro", "data":""}
+        expected = {"name":"Macbook Pro", "data":{}}
         # assert
         self.assertDictEqual(
             result.serialize(),
@@ -144,12 +143,57 @@ class TestRequestBuilder(unittest.TestCase):
             .add_data("color","white")
             .build()
         )
-        expected = {"name":"", "data":{"color":"white"}}
+        expected = {"name":None, "data":{"color":"white"}}
         # assert
         self.assertDictEqual(
             result.serialize(),
             expected
         ), "Request builder did not return correct data"
+    
+    def test_request_builder_with_big_data(self):
+        # arrange
+        result = (
+            RequestBodyBuilder()
+            .name("Copilot")
+            .add_data("model","some-new-model")
+            .add_data("year","2025")
+            .add_data("owner","someonefromusa")
+            .add_data("user","user")
+            .add_data("limit",None)
+            .add_data("token","")
+            .add_data("used","false")
+            .add_data("user-region","usa")
+            .add_data("memory","enabled")
+            .add_data("tracking",False)
+            .add_data("vibe-coded",True)
+            .add_data("random-amount", 500_500)
+            .add_data("inner",{"name":"John"})
+            .build()
+        )
+
+        expected = {
+            "name":"Copilot",
+            "data":{
+                "model":"some-new-model",
+                "year":"2025",
+                "owner":"someonefromusa",
+                "user":"user",
+                "limit":None,
+                "token":"",
+                "used":"false",
+                "user-region":"usa",
+                "memory":"enabled",
+                "tracking":False,
+                "vibe-coded":True,
+                "random-amount": 500_500,
+                "inner":{"name":"John"}
+            }
+        }
+        # act
+        self.assertDictEqual(
+            result.serialize(),
+            expected
+        )
 
 
 if __name__ == "__main__":

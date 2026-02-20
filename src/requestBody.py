@@ -41,7 +41,7 @@ class RequestBodyBuilder:
         if not isinstance(name, str):
             raise TypeError("Name type can be only string!")
     
-        self.name = name
+        self._name = name
         return self
     
     def add_data(self, key:str, value:Any) -> Self:
